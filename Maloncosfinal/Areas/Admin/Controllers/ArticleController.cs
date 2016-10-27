@@ -35,7 +35,7 @@ namespace Maloncos.Areas.Admin.Controllers
         //
         // GET: /Admin/Article/Create
         [HttpGet]
-        public ActionResult Create_Article()
+        public ActionResult CreateArticle()
         {
             var model = new ArticleModel();
             return View(model);
@@ -45,7 +45,7 @@ namespace Maloncos.Areas.Admin.Controllers
         // POST: /Admin/Article/Create
 
         [HttpPost]
-        public ActionResult Create_Article(ArticleModel articleToCreate)
+        public ActionResult CreateArticle(ArticleModel articleToCreate)
         {
             string image = SaveImage();
 
@@ -63,8 +63,7 @@ namespace Maloncos.Areas.Admin.Controllers
             article.Image = image;
             article.Categorie = articleToCreate.Categorie;
             article.Type = articleToCreate.Type;
-            
-                 
+                             
             try
             {
                 _db.AddToArticles(article);
