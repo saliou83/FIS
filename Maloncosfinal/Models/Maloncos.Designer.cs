@@ -516,8 +516,6 @@ namespace Maloncos.Models
         }
 
         #endregion
-
-        
     }
     
     /// <summary>

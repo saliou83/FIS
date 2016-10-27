@@ -67,8 +67,8 @@ namespace Maloncos.Areas.Admin.Controllers
                  
             try
             {
-                //_db.AddToArticles(articleToCreate);
-                //_db.SaveChanges();
+                _db.AddToArticles(article);
+                _db.SaveChanges();
 
                 return RedirectToAction("Create_Article");
             }

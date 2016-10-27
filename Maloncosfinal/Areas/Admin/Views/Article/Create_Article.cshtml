@@ -1,0 +1,98 @@
+﻿@model Maloncos.Areas.Admin.Models.ArticleModel
+@{
+    
+    ViewBag.Title = "Create_Article";
+}
+
+
+<h2>Create_Article</h2>
+
+@using (Html.BeginForm("Create_Article", "Article", FormMethod.Post, new { enctype = "multipart/form-data", area = "Admin" }))
+{
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Articles</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Num_Articles)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Num_Articles)
+            @Html.ValidationMessageFor(model => model.Num_Articles)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Libelle)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Libelle)
+            @Html.ValidationMessageFor(model => model.Libelle)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Description)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Description)
+            @Html.ValidationMessageFor(model => model.Description)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Composition)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Composition)
+            @Html.ValidationMessageFor(model => model.Composition)
+        </div>
+         <div class="editor-label">
+            @Html.LabelFor(model => model.Taille)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Taille)
+            @Html.ValidationMessageFor(model => model.Taille)
+        </div>
+
+         <div class="editor-label">
+            @Html.LabelFor(model => model.Couleur)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Couleur)
+            @Html.ValidationMessageFor(model => model.Couleur)
+
+        </div>
+         <div class="editor-label">
+            @Html.LabelFor(model => model.Prix_Article)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Prix_Article)
+            @Html.ValidationMessageFor(model => model.Prix_Article)
+        </div>
+
+         <div class="editor-label">
+            @Html.LabelFor(model => model.Image)
+        </div>
+        <div class="editor-field">
+            
+            @Html.TextBoxFor(model => model.Image, new { @type="file"} )        
+            @Html.ValidationMessageFor(model => model.Image)
+        </div>
+
+         <div class="editor-label">
+            @Html.LabelFor(model => model.Categorie)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Categorie)
+            @Html.ValidationMessageFor(model => model.Categorie)
+        </div>
+
+         <div class="editor-label">
+            @Html.LabelFor(model => model.Type)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Type)
+            @Html.ValidationMessageFor(model => model.Type)
+        </div>
+        <p>
+            <input type="submit" value="Enregistrer" />
+        </p>
+    </fieldset>
+}
