@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MaloncosModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="MaloncosModelStoreContainer">
+    <EntitySet Name="Articles" EntityType="MaloncosModel.Store.Articles" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Categories" EntityType="MaloncosModel.Store.Categories" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Clients" EntityType="MaloncosModel.Store.Clients" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Commande" EntityType="MaloncosModel.Store.Commande" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Compte" EntityType="MaloncosModel.Store.Compte" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Ligne_commande" EntityType="MaloncosModel.Store.Ligne_commande" store:Type="Tables" store:Schema="dbo" store:Name="Ligne_commande">
+      <DefiningQuery>SELECT 
+      [Ligne_commande].[Num_Article] AS [Num_Article], 
+      [Ligne_commande].[Num_Client] AS [Num_Client], 
+      [Ligne_commande].[Num_Commande] AS [Num_Commande], 
+      [Ligne_commande].[Quantite] AS [Quantite]
+      FROM [dbo].[Ligne_commande] AS [Ligne_commande]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="Type" EntityType="MaloncosModel.Store.Type" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="C2" Association="MaloncosModel.Store.C2">
+      <End Role="Articles" EntitySet="Articles" />
+      <End Role="Categories" EntitySet="Categories" />
+    </AssociationSet>
+    <AssociationSet Name="C3" Association="MaloncosModel.Store.C3">
+      <End Role="Articles" EntitySet="Articles" />
+      <End Role="Type" EntitySet="Type" />
+    </AssociationSet>
+    <AssociationSet Name="C4" Association="MaloncosModel.Store.C4">
+      <End Role="Articles" EntitySet="Articles" />
+      <End Role="Ligne_commande" EntitySet="Ligne_commande" />
+    </AssociationSet>
+    <AssociationSet Name="C5" Association="MaloncosModel.Store.C5">
+      <End Role="Clients" EntitySet="Clients" />
+      <End Role="Ligne_commande" EntitySet="Ligne_commande" />
+    </AssociationSet>
+    <AssociationSet Name="C6" Association="MaloncosModel.Store.C6">
+      <End Role="Commande" EntitySet="Commande" />
+      <End Role="Ligne_commande" EntitySet="Ligne_commande" />
+    </AssociationSet>
+    <AssociationSet Name="C7" Association="MaloncosModel.Store.C7">
+      <End Role="Clients" EntitySet="Clients" />
+      <End Role="Compte" EntitySet="Compte" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Articles">
+    <Key>
+      <PropertyRef Name="Num_Articles" />
+    </Key>
+    <Property Name="Num_Articles" Type="int" Nullable="false" />
+    <Property Name="Libelle" Type="varchar" Nullable="false" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="Categories">
+    <Key>
+      <PropertyRef Name="Num_Categorie" />
+    </Key>
+    <Property Name="Num_Categorie" Type="int" Nullable="false" />
+    <Property Name="Libelle_Cat" Type="varchar" Nullable="false" MaxLength="200" />
+    <Property Name="Genre" Type="varchar" Nullable="false" MaxLength="200" />
+    <Property Name="Num_Articles" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Clients">
+    <Key>
+      <PropertyRef Name="Num_Client" />
+    </Key>
+    <Property Name="Num_Client" Type="int" Nullable="false" />
+    <Property Name="Nom" Type="varchar" Nullable="false" MaxLength="200" />
+    <Property Name="Prenom" Type="varchar" Nullable="false" MaxLength="200" />
+    <Property Name="Adresse1" Type="varchar" Nullable="false" MaxLength="200" />
+    <Property Name="Adresse2" Type="varchar" MaxLength="200" />
+    <Property Name="Telephone" Type="varchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="Commande">
+    <Key>
+      <PropertyRef Name="Num_Commande" />
+    </Key>
+    <Property Name="Num_Commande" Type="int" Nullable="false" />
+    <Property Name="Date" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Compte">
+    <Key>
+      <PropertyRef Name="Num_Compte" />
+    </Key>
+    <Property Name="Num_Compte" Type="int" Nullable="false" />
+    <Property Name="Date" Type="date" Nullable="false" />
+    <Property Name="Num_Client" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+      warning 6002: The table/view 'Maloncos.dbo.Ligne_commande' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+  <EntityType Name="Ligne_commande">
+    <Key>
+      <PropertyRef Name="Num_Article" />
+      <PropertyRef Name="Num_Client" />
+      <PropertyRef Name="Num_Commande" />
+      <PropertyRef Name="Quantite" />
+    </Key>
+    <Property Name="Num_Article" Type="int" Nullable="false" />
+    <Property Name="Num_Client" Type="int" Nullable="false" />
+    <Property Name="Num_Commande" Type="int" Nullable="false" />
+    <Property Name="Quantite" Type="varchar" Nullable="false" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="Type">
+    <Key>
+      <PropertyRef Name="Num_Type" />
+    </Key>
+    <Property Name="Num_Type" Type="int" Nullable="false" />
+    <Property Name="Libelle_Type" Type="varchar" Nullable="false" MaxLength="200" />
+    <Property Name="Num_Articles" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="C2">
+    <End Role="Articles" Type="MaloncosModel.Store.Articles" Multiplicity="1" />
+    <End Role="Categories" Type="MaloncosModel.Store.Categories" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Articles">
+        <PropertyRef Name="Num_Articles" />
+      </Principal>
+      <Dependent Role="Categories">
+        <PropertyRef Name="Num_Articles" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="C3">
+    <End Role="Articles" Type="MaloncosModel.Store.Articles" Multiplicity="1" />
+    <End Role="Type" Type="MaloncosModel.Store.Type" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Articles">
+        <PropertyRef Name="Num_Articles" />
+      </Principal>
+      <Dependent Role="Type">
+        <PropertyRef Name="Num_Articles" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="C4">
+    <End Role="Articles" Type="MaloncosModel.Store.Articles" Multiplicity="1" />
+    <End Role="Ligne_commande" Type="MaloncosModel.Store.Ligne_commande" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Articles">
+        <PropertyRef Name="Num_Articles" />
+      </Principal>
+      <Dependent Role="Ligne_commande">
+        <PropertyRef Name="Num_Article" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="C5">
+    <End Role="Clients" Type="MaloncosModel.Store.Clients" Multiplicity="1" />
+    <End Role="Ligne_commande" Type="MaloncosModel.Store.Ligne_commande" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clients">
+        <PropertyRef Name="Num_Client" />
+      </Principal>
+      <Dependent Role="Ligne_commande">
+        <PropertyRef Name="Num_Client" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="C6">
+    <End Role="Commande" Type="MaloncosModel.Store.Commande" Multiplicity="1" />
+    <End Role="Ligne_commande" Type="MaloncosModel.Store.Ligne_commande" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Commande">
+        <PropertyRef Name="Num_Commande" />
+      </Principal>
+      <Dependent Role="Ligne_commande">
+        <PropertyRef Name="Num_Commande" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="C7">
+    <End Role="Clients" Type="MaloncosModel.Store.Clients" Multiplicity="1" />
+    <End Role="Compte" Type="MaloncosModel.Store.Compte" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clients">
+        <PropertyRef Name="Num_Client" />
+      </Principal>
+      <Dependent Role="Compte">
+        <PropertyRef Name="Num_Client" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

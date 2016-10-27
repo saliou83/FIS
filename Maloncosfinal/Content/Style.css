@@ -1,0 +1,13 @@
+﻿
+.row {
+    margin-bottom: 15px;
+}
+
+.row [class^="col-"] {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #eee;
+    border: 1px solid #ddd;
+    background-color: blue;
+    border: 1px solid rgba(86,61,124,.2);
+}

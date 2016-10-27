@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="MaloncosModelStoreContainer" CdmEntityContainer="MaloncosEntities1">
+    <EntitySetMapping Name="Articles">
+      <EntityTypeMapping TypeName="MaloncosModel.Articles">
+        <MappingFragment StoreEntitySet="Articles">
+          <ScalarProperty Name="Num_Articles" ColumnName="Num_Articles" />
+          <ScalarProperty Name="Libelle" ColumnName="Libelle" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Composition" ColumnName="Composition" />
+          <ScalarProperty Name="Taille" ColumnName="Taille" />
+          <ScalarProperty Name="Couleur" ColumnName="Couleur" />
+          <ScalarProperty Name="Prix_Article" ColumnName="Prix_Article" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="Categorie" ColumnName="Categorie" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Clients">
+      <EntityTypeMapping TypeName="MaloncosModel.Clients">
+        <MappingFragment StoreEntitySet="Clients">
+          <ScalarProperty Name="Num_Client" ColumnName="Num_Client" />
+          <ScalarProperty Name="Nom" ColumnName="Nom" />
+          <ScalarProperty Name="Prenom" ColumnName="Prenom" />
+          <ScalarProperty Name="Adresse1" ColumnName="Adresse1" />
+          <ScalarProperty Name="Adresse2" ColumnName="Adresse2" />
+          <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Commande">
+      <EntityTypeMapping TypeName="MaloncosModel.Commande">
+        <MappingFragment StoreEntitySet="Commande">
+          <ScalarProperty Name="Num_Commande" ColumnName="Num_Commande" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Compte">
+      <EntityTypeMapping TypeName="MaloncosModel.Compte">
+        <MappingFragment StoreEntitySet="Compte">
+          <ScalarProperty Name="Num_Compte" ColumnName="Num_Compte" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Num_Client" ColumnName="Num_Client" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ligne_commande">
+      <EntityTypeMapping TypeName="MaloncosModel.Ligne_commande">
+        <MappingFragment StoreEntitySet="Ligne_commande">
+          <ScalarProperty Name="Num_Article" ColumnName="Num_Article" />
+          <ScalarProperty Name="Num_Client" ColumnName="Num_Client" />
+          <ScalarProperty Name="Num_Commande" ColumnName="Num_Commande" />
+          <ScalarProperty Name="Quantite" ColumnName="Quantite" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
