@@ -25,14 +25,6 @@ namespace Maloncos.Areas.Admin.Controllers
         }
 
         //
-        // GET: /Admin/Article/Details/5
-
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        //
         // GET: /Admin/Article/Create
         [HttpGet]
         public ActionResult CreateArticle()
@@ -77,93 +69,7 @@ namespace Maloncos.Areas.Admin.Controllers
             }
         }
         
-        //
-        // GET: /Admin/Article/Edit/5
- 
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        //
-        // POST: /Admin/Article/Edit/5
-
-        [HttpPost]
-        public ActionResult Edit(int id, Articles article)
-        {
-            try
-            {
-                // TODO: Add update logic here
- 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        //
-        // GET: /Admin/Article/Delete/5
- 
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        //
-        // POST: /Admin/Article/Delete/5
-
-        [HttpPost]
-        public ActionResult Delete(int id, Articles article)
-        {
-            try
-            {
-                // TODO: Add delete logic here
- 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-
-        [HttpGet]
-        public ActionResult UploadFiles()
-        {
-            var model = new TestModel();
-            return View("UploadFiles", model);
-        }
-
-        [HttpPost]
-        public ActionResult UploadFiles(HttpPostedFileBase file)
-        {
-            if (ModelState.IsValid)
-            {
-                try
-                {
-
-                    if (file != null)
-                    {
-                        string path = Path.Combine(Server.MapPath("~/ftp"), Path.GetFileName(file.FileName));
-                        file.SaveAs(path);
-
-                    }
-                    ViewBag.FileStatus = "Fichier enregfistré avec succés";
-                }
-                catch (Exception ex)
-                {
-
-                    ViewBag.FileStatus = "L'enregistrement du fichier a échoué.";
-                }
-
-            }
-            return View("UploadFiles");
-        }
-
-
+             
         #region Méthode privée
 
         private string SaveImage()
