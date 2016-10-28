@@ -16,7 +16,7 @@ namespace Maloncos.Areas.Admin.Controllers
 
         public ActionResult Index()
         {
-            return View("/Areas/Admin/Views/Admin/Index.cshtml",_db.Articles.ToList());
+            return View("/Areas/Admin/Views/Admin/Index.cshtml");
         }
 
         //
@@ -24,6 +24,8 @@ namespace Maloncos.Areas.Admin.Controllers
 
         public ActionResult Details(int id)
         {
+            
+            
             return View();
         }
 
@@ -64,19 +66,30 @@ namespace Maloncos.Areas.Admin.Controllers
  
         public ActionResult Edit(int id)
         {
-            return View();
+             var articleToEdit = (from m in _db.Articles
+                       where m.Num_Articles == id
+                       select m).First();
+            return View(articleToEdit);
         }
 
         //
         // POST: /Admin/Admin/Edit/5
 
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(Articles articleToEdit)
         {
+            if (!ModelState.IsValid)
+                return View();
+
             try
             {
-                // TODO: Add update logic here
- 
+                var originalMovie = (from m in _db.Articles
+                                     where m.Num_Articles == articleToEdit.Num_Articles
+                                     select m).First();
+
+                _db.ApplyPropertyChanges(originalMovie.EntityKey.EntitySetName, articleToEdit);
+                _db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
             catch

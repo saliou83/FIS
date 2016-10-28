@@ -12,12 +12,14 @@
     <div class="page">
         <header>
             <div id="title">
-                <h1>My MVC Application</h1>
+                
+                 <img  alt="image maloncos" src="../../../../Content/images/maloncos3.png"/>
             </div>
             <nav>
                 <ul id="menu">
+                    <li>@Html.ActionLink("Accueil", "Index", "Admin", new { Area = "Admin" }, new { })</li>
                     <li>@Html.ActionLink("Article", "Index", "Article", new { Area = "Admin" }, new { })</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
+            
                 </ul>
             </nav>
         </header>

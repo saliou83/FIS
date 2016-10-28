@@ -21,7 +21,7 @@ namespace Maloncos.Areas.Admin.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            return View(_db.Articles.ToList());
         }
 
         //
@@ -75,6 +75,7 @@ namespace Maloncos.Areas.Admin.Controllers
         private string SaveImage()
         {
             string result= string.Empty;
+           
             try
             {
                 HttpPostedFileBase file;
@@ -118,5 +119,116 @@ namespace Maloncos.Areas.Admin.Controllers
         }
 
         #endregion
+    //
+        // GET: /Admin/Admin/Edit/5
+ 
+        public ActionResult Edit(int id)
+        {
+             var articleToEdit = (from m in _db.Articles
+                       where m.Num_Articles == id
+                       select m).First();
+            return View(articleToEdit);
+        }
+
+        //
+        // POST: /Admin/Admin/Edit/5
+
+        [HttpPost]
+        public ActionResult Edit(Articles articleToEdit)
+        {
+           
+            if (!ModelState.IsValid)
+                return View();
+
+            try
+            {   string image = SaveImageEdit();
+            articleToEdit.Image = image;
+                var originalArticle = (from m in _db.Articles
+                                     where m.Num_Articles == articleToEdit.Num_Articles && m.Image == articleToEdit.Image
+                                     select m).First();
+                
+                _db.ApplyCurrentValues(originalArticle.EntityKey.EntitySetName, articleToEdit);
+                _db.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+}
+        private string SaveImageEdit()
+        {
+            string result =string.Empty ;
+
+            try
+            {
+                HttpPostedFileBase file;
+                if (Request.Files.Count > 0 && Request.Files[0].ContentLength > 0)
+                {
+
+                    file = Request.Files[1];
+                    if (file.ContentType.ToLower().Contains("image"))
+                    {
+                        string fileName = file.FileName;
+                        string path = Path.Combine(Server.MapPath("~/Content/images/articles"), Path.GetFileName(fileName));
+                        int i = 0;
+                        while (System.IO.File.Exists(path))
+                        {
+                            i += 1;
+                            fileName = i.ToString() + "-" + file.FileName;
+                            path = Path.Combine(Server.MapPath("/Content/images/articles"), Path.GetFileName(fileName));
+                        }
+
+                        file.SaveAs(path);
+                        result = "~/Content/images/articles/" + fileName;
+
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("Image", "L'image de l'article est obligatoire.");
+                    }
+
+                }
+                else
+                {
+                    ModelState.AddModelError("Image", "L'image de l'article est obligatoire.");
+                }
+            }
+            catch (Exception e)
+            {
+                ModelState.AddModelError("", e);
+            }
+
+            return result;
+        }
+
+        //
+        // GET: /Admin/Admin/Delete/5
+ 
+        public ActionResult Delete(int id)
+        {
+            return View();
+        }
+
+        //
+        // POST: /Admin/Admin/Delete/5
+
+        [HttpPost]
+        public ActionResult Delete(int id, Articles articleTodelete)
+        {
+            try
+            {
+                // TODO: Add delete logic here
+ 
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
     }
 }
+
+

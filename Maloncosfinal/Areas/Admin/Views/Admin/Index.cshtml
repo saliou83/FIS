@@ -1,36 +1,9 @@
-﻿@model IEnumerable<Maloncos.Models.Articles>
-
-@{
-    ViewBag.Title = "Index";
+﻿@{
+    ViewBag.Title = "Admin Index";
 }
 
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create");
+ Bienvenu sur la page d'administration du site Maloncos
 </p>
-<table>
-    <tr>
-        <th>
-            Libelle
-        </th>
-        <th></th>
-    </tr>
-    
-@foreach(var item in Model) {
-    if ((item.Libelle != null))
-    {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Libelle)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.Num_Articles }) |
-            @Html.ActionLink("Details", "Details", new { id = item.Num_Articles }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.Num_Articles })
-        </td>
-    </tr>
-    }
-}
-
-</table>
